@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { pageShell, recordCard, institutionRail, identityHero, portalGrid } from '../src/components.mjs';
+import { pageShell, institutionRail, identityHero, portalGrid, timeline } from '../src/components.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(here,'..');
@@ -15,15 +15,20 @@ const labels={
  'zh-tw':{lang:'zh-Hant',title:'蔡明城 Peter Tsai Ming-Cheng',chineseName:'蔡明城',eyebrow:'Communications · Intelligent Connectivity · AI',lead:'從通訊研究出發，跨越無線與光通訊、衛星與非地面網路、AI 智慧互聯，到技術探索、產業生態系統與專業服務。',institutions:'精選機構與專業社群',officialRecord:'官方紀錄',portrait,portraitAlt:'蔡明城 Peter Tsai Ming-Cheng 個人照片'},
  'zh-cn':{lang:'zh-Hans',title:'蔡明城 Peter Tsai Ming-Cheng',chineseName:'蔡明城',eyebrow:'Communications · Intelligent Connectivity · AI',lead:'从通信研究出发，跨越无线与光通信、卫星与非地面网络、AI 智能互联，到技术探索、产业生态系统与专业服务。',institutions:'精选机构与专业社群',officialRecord:'官方记录',portrait,portraitAlt:'蔡明城 Peter Tsai Ming-Cheng 个人照片'}
 };
-const talksLabels={en:{lang:'en',title:'Academic Milestones',eyebrow:'Talks · Academic Record',officialRecord:'Official record'},'zh-tw':{lang:'zh-Hant',title:'學術里程碑',eyebrow:'演講與發表 · 學術紀錄',officialRecord:'官方紀錄'},'zh-cn':{lang:'zh-Hans',title:'学术里程碑',eyebrow:'演讲与发表 · 学术记录',officialRecord:'官方记录'}};
+const talksLabels={
+ en:{lang:'en',title:'Academic Milestones',eyebrow:'Talks · Academic Record',officialRecord:'Official record',timelineLabel:'Academic milestones, newest to oldest'},
+ 'zh-tw':{lang:'zh-Hant',title:'學術里程碑',eyebrow:'演講與發表 · 學術紀錄',officialRecord:'官方紀錄',timelineLabel:'學術里程碑，由新至舊'},
+ 'zh-cn':{lang:'zh-Hans',title:'学术里程碑',eyebrow:'演讲与发表 · 学术记录',officialRecord:'官方记录',timelineLabel:'学术里程碑，由新至旧'}
+};
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'public'),out,{recursive:true});
 for(const locale of data.locales){
  const copy=labels[locale],trajectory=data.records.find(r=>r.id==='home-trajectory');
  const homeBody=`${identityHero(locale,copy)}<p class="home-trajectory" data-record-id="home-trajectory">${trajectory.title[locale]}</p>${institutionRail(institutions,locale,copy.institutions)}${portalGrid(locale,portals.portals)}`;
  const dir=path.join(out,locale);fs.mkdirSync(dir,{recursive:true});
  fs.writeFileSync(path.join(dir,'index.html'),pageShell({locale,lang:copy.lang,title:copy.title,eyebrow:copy.eyebrow,body:homeBody,hero:true}));
- const t=talksLabels[locale],records=data.records.filter(r=>r.surfaces.includes('talks')&&r.evidence.level!=='narrative');
- const talksBody=`<section class="record-stack" aria-label="${t.title}">${records.map(r=>recordCard(r,locale,t)).join('\n')}</section>`;
+ const t=talksLabels[locale];
+ const records=data.records.filter(r=>r.surfaces.includes('talks')&&r.evidence.level!=='narrative').sort((a,b)=>(b.date??'').localeCompare(a.date??''));
+ const talksBody=timeline(records,locale,t);
  fs.writeFileSync(path.join(dir,'talks.html'),pageShell({locale,lang:t.lang,title:t.title,eyebrow:t.eyebrow,body:talksBody}));
 }
-console.log(`Rendered identity home, institutions, portals + talks for ${data.locales.length} locales.`);
+console.log(`Rendered identity home, institutions, portals + chronological talks for ${data.locales.length} locales.`);
