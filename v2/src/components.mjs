@@ -4,6 +4,10 @@ export function identityHero(locale, copy) {
   return `<section class="identity-hero" data-section-id="identity"><div class="identity-copy"><p class="eyebrow">${esc(copy.eyebrow)}</p><h1 class="identity-title">${locale==='en'?'':`<span class="identity-cjk">${esc(copy.chineseName)}</span>`}<span class="identity-name">Peter Ts<span class="identity-ai">ai</span> Ming-Ch<span class="identity-eng">eng</span></span></h1><p class="degree-line">Ph.D. · Electrical &amp; Computer Engineering</p><p class="identity-lead">${esc(copy.lead)}</p></div><figure class="portrait-glass glass"><img src="${esc(copy.portrait)}" alt="${esc(copy.portraitAlt)}" width="200" height="200" loading="eager" decoding="async"><span class="portrait-signal" aria-hidden="true"></span></figure></section>`;
 }
 
+export function portalGrid(locale, items) {
+  return `<nav class="portal-grid" data-section-id="portals" aria-label="Primary sections">${items.map((item,index)=>`<a class="portal-card glass" data-portal-id="${esc(item.id)}" href="/${locale}/${esc(item.path)}"><span class="portal-index">${String(index+1).padStart(2,'0')}</span><span class="portal-copy"><strong>${esc(item.title[locale])}</strong><small>${esc(item.description[locale])}</small></span><span class="portal-arrow" aria-hidden="true">↗</span></a>`).join('')}</nav>`;
+}
+
 export function recordCard(record, locale, labels) {
   const evidence = record.evidence?.url ? `<a class="evidence-link" href="${esc(record.evidence.url)}" rel="noopener">${esc(labels.officialRecord)} <span aria-hidden="true">↗</span></a>` : '';
   return `<article class="record-card glass" data-record-id="${esc(record.id)}" data-evidence="${esc(record.evidence.level)}"><p class="record-meta">${esc(record.date ?? '')}${record.meta?.[locale] ? ` · ${esc(record.meta[locale])}` : ''}</p><h2>${esc(record.title[locale])}</h2>${record.details?.[locale] ? `<p class="record-detail">${esc(record.details[locale])}</p>` : ''}${evidence}</article>`;
