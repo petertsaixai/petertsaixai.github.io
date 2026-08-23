@@ -6,6 +6,11 @@ on:
     paths:
       - 'v2/**'
       - '.github/workflows/v2-preview.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'v2/**'
+      - '.github/workflows/v2-preview.yml'
   workflow_dispatch:
 
 permissions:
