@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "locales": ["en", "zh-tw", "zh-cn"],
+  "evidenceLevels": ["official", "publication", "institutional", "self_reported", "narrative"],
+  "records": [
+    {
+      "id": "kaust-phd-defense-2023",
+      "type": "dissertation-defense",
+      "date": "2023-11-29",
+      "institution": "KAUST",
+      "title": {
+        "en": "Broadband Wireless Communication Using Free-space Optics and Radio Frequency",
+        "zh-tw": "Broadband Wireless Communication Using Free-space Optics and Radio Frequency",
+        "zh-cn": "Broadband Wireless Communication Using Free-space Optics and Radio Frequency"
+      },
+      "meta": {
+        "en": "Ph.D. Dissertation Defense · KAUST",
+        "zh-tw": "博士論文答辯 · KAUST",
+        "zh-cn": "博士论文答辩 · KAUST"
+      },
+      "details": {
+        "en": "Electrical and Computer Engineering · Communication Theory Lab (CTL). Supervisor: Prof. Mohamed-Slim Alouini.",
+        "zh-tw": "電機與電腦工程 · Communication Theory Lab (CTL)。指導教授：Prof. Mohamed-Slim Alouini。",
+        "zh-cn": "电机与计算机工程 · Communication Theory Lab (CTL)。指导教授：Prof. Mohamed-Slim Alouini。"
+      },
+      "evidence": {
+        "level": "official",
+        "source": "KAUST CEMSE",
+        "url": "https://cemse.kaust.edu.sa/events/by-type/phd-dissertation-defense/2023/11/29/broadband-wireless-communication-using-free"
+      },
+      "surfaces": ["talks", "experience", "research"]
+    },
+    {
+      "id": "home-trajectory",
+      "type": "positioning",
+      "title": {
+        "en": "Research → Technology → Industry → Public Impact",
+        "zh-tw": "研究 → 技術 → 產業 → 公共影響",
+        "zh-cn": "研究 → 技术 → 产业 → 公共影响"
+      },
+      "evidence": {
+        "level": "narrative",
+        "source": "site positioning"
+      },
+      "surfaces": ["home"]
+    }
+  ]
+}
