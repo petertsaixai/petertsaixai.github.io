@@ -3,23 +3,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Peter Tsai, Ph.D. — professional personal website.">
+  <meta name="robots" content="noindex">
   <title>Peter Tsai, Ph.D.</title>
-  <link rel="stylesheet" href="/styles.css">
+  <script>
+    (function () {
+      var routes = { en: '/en/', 'zh-tw': '/zh-tw/', 'zh-cn': '/zh-cn/' };
+      var saved = localStorage.getItem('site-lang');
+      if (saved && routes[saved]) {
+        location.replace(routes[saved]);
+        return;
+      }
+
+      var langs = navigator.languages && navigator.languages.length
+        ? navigator.languages
+        : [navigator.language || 'en'];
+      var target = '/en/';
+
+      for (var i = 0; i < langs.length; i++) {
+        var lang = String(langs[i]).toLowerCase();
+        if (/^zh-(tw|hk|mo|hant)/.test(lang)) { target = '/zh-tw/'; break; }
+        if (/^zh-(cn|sg|hans)/.test(lang) || lang === 'zh') { target = '/zh-cn/'; break; }
+        if (/^en/.test(lang)) { target = '/en/'; break; }
+      }
+
+      location.replace(target);
+    }());
+  </script>
+  <noscript><meta http-equiv="refresh" content="0;url=/zh-tw/"></noscript>
 </head>
-<body class="language-landing">
-  <main class="language-shell">
-    <section class="language-card">
-      <div class="brand-mark">PT</div>
-      <p class="eyebrow">Peter Tsai, Ph.D.</p>
-      <h1>Choose your language</h1>
-      <p class="lead">Communications · Intelligent Connectivity · AI · Technology Ecosystems</p>
-      <div class="language-grid">
-        <a class="language-option" href="/en/"><strong>English</strong><span>Professional profile</span></a>
-        <a class="language-option" href="/zh-tw/"><strong>繁體中文</strong><span>專業個人網站</span></a>
-        <a class="language-option" href="/zh-cn/"><strong>简体中文</strong><span>专业个人网站</span></a>
-      </div>
-    </section>
-  </main>
-</body>
+<body></body>
 </html>
