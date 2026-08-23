@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "identity": {
+    "id": "peter-tsai-ming-cheng",
+    "displayName": "Peter Tsai Ming-Cheng",
+    "motionTokens": ["AI", "TSAI", "ENG"]
+  },
+  "nodeTypes": [
+    "person", "institution", "education", "experience", "research_topic",
+    "mentor", "thesis", "publication", "presentation", "award", "teaching",
+    "place", "evidence"
+  ],
+  "visibilityLevels": ["hero", "explore", "evidence", "internal"],
+  "nodes": [],
+  "edges": [],
+  "rules": {
+    "chronology": "newest-first",
+    "motion": ["reveal", "hold", "connect", "resolve"],
+    "resolveTo": "peter-tsai-ming-cheng",
+    "evidenceOnDemand": true,
+    "avoidUnsupportedClaims": true
+  }
+}
