@@ -15,6 +15,12 @@ on:
 
 permissions:
   contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: v2-preview-pages
+  cancel-in-progress: true
 
 jobs:
   build-preview:
@@ -30,10 +36,36 @@ jobs:
         run: node v2/build/render.mjs
       - name: Validate rendered parity
         run: node v2/qa/validate-render.mjs
-      - name: Upload preview artifact
+      - name: Upload review artifact
         uses: actions/upload-artifact@v4
         with:
           name: peter-site-v2-preview
           path: v2/dist
           if-no-files-found: error
           retention-days: 14
+      - name: Prepare isolated Pages preview
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        run: |
+          mkdir -p _preview/v2-preview
+          cp -R v2/dist/. _preview/v2-preview/
+          cat > _preview/index.html <<'EOF'
+          <!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Peter Tsai v2 Preview</title></head><body><p><a href="/v2-preview/en/">Open v2 preview</a></p></body></html>
+          EOF
+          touch _preview/.nojekyll
+      - name: Upload Pages artifact
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _preview
+
+  deploy-preview:
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: build-preview
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}v2-preview/en/
+    steps:
+      - name: Deploy isolated v2 preview
+        id: deployment
+        uses: actions/deploy-pages@v4
