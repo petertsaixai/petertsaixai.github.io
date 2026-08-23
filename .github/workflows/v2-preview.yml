@@ -1,0 +1,34 @@
+name: v2 preview
+
+on:
+  push:
+    branches: [v2-system]
+    paths:
+      - 'v2/**'
+      - '.github/workflows/v2-preview.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate canonical content
+        run: node v2/qa/validate-content.mjs
+      - name: Build v2 preview
+        run: node v2/build/render.mjs
+      - name: Validate rendered parity
+        run: node v2/qa/validate-render.mjs
+      - name: Upload preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: peter-site-v2-preview
+          path: v2/dist
+          if-no-files-found: error
+          retention-days: 14
