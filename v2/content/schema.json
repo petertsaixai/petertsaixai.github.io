@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://petertsaixai.github.io/v2/content/schema.json",
+  "title": "Peter Tsai v2 content record",
+  "type": "object",
+  "required": ["id", "type", "title", "evidence", "surfaces"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+    "type": {"type": "string", "minLength": 1},
+    "date": {"type": "string", "format": "date"},
+    "institution": {"type": "string"},
+    "title": {"$ref": "#/$defs/localizedRequired"},
+    "meta": {"$ref": "#/$defs/localizedRequired"},
+    "details": {"$ref": "#/$defs/localizedRequired"},
+    "evidence": {
+      "type": "object",
+      "required": ["level", "source"],
+      "properties": {
+        "level": {"enum": ["official", "publication", "institutional", "self_reported", "narrative"]},
+        "source": {"type": "string", "minLength": 1},
+        "url": {"type": "string", "format": "uri"}
+      },
+      "additionalProperties": false
+    },
+    "surfaces": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"enum": ["home", "experience", "research", "publications", "talks", "recognition", "service"]}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "localizedRequired": {
+      "type": "object",
+      "required": ["en", "zh-tw", "zh-cn"],
+      "properties": {
+        "en": {"type": "string", "minLength": 1},
+        "zh-tw": {"type": "string", "minLength": 1},
+        "zh-cn": {"type": "string", "minLength": 1}
+      },
+      "additionalProperties": false
+    }
+  }
+}
