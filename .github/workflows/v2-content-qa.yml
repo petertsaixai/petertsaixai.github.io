@@ -1,0 +1,27 @@
+name: v2 content QA
+
+on:
+  push:
+    branches: [v2-system]
+    paths:
+      - 'v2/content/**'
+      - 'v2/qa/**'
+      - '.github/workflows/v2-content-qa.yml'
+  pull_request:
+    paths:
+      - 'v2/content/**'
+      - 'v2/qa/**'
+
+permissions:
+  contents: read
+
+jobs:
+  content-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate multilingual records and evidence
+        run: node v2/qa/validate-content.mjs
