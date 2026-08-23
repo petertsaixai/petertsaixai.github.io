@@ -1,12 +1,13 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { pageShell, recordCard, institutionRail, identityHero } from '../src/components.mjs';
+import { pageShell, recordCard, institutionRail, identityHero, portalGrid } from '../src/components.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(here,'..');
 const data=JSON.parse(fs.readFileSync(path.join(root,'content','records.json'),'utf8'));
 const institutions=JSON.parse(fs.readFileSync(path.join(root,'content','institutions.json'),'utf8'));
+const portals=JSON.parse(fs.readFileSync(path.join(root,'content','portals.json'),'utf8'));
 const out=path.join(root,'dist');
 const portrait='https://media.licdn.com/dms/image/v2/D4E03AQG_UYjpZjFpTg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1712650512624?e=2147483647&v=beta&t=drg6yKAaWPMffsPBby_dwCvIoZGv1mvmPxjFDOy0duo';
 const labels={
@@ -18,11 +19,11 @@ const talksLabels={en:{lang:'en',title:'Academic Milestones',eyebrow:'Talks · A
 fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});fs.cpSync(path.join(root,'public'),out,{recursive:true});
 for(const locale of data.locales){
  const copy=labels[locale],trajectory=data.records.find(r=>r.id==='home-trajectory');
- const homeBody=`${identityHero(locale,copy)}<p class="home-trajectory" data-record-id="home-trajectory">${trajectory.title[locale]}</p>${institutionRail(institutions,locale,copy.institutions)}`;
+ const homeBody=`${identityHero(locale,copy)}<p class="home-trajectory" data-record-id="home-trajectory">${trajectory.title[locale]}</p>${institutionRail(institutions,locale,copy.institutions)}${portalGrid(locale,portals.portals)}`;
  const dir=path.join(out,locale);fs.mkdirSync(dir,{recursive:true});
  fs.writeFileSync(path.join(dir,'index.html'),pageShell({locale,lang:copy.lang,title:copy.title,eyebrow:copy.eyebrow,body:homeBody,hero:true}));
  const t=talksLabels[locale],records=data.records.filter(r=>r.surfaces.includes('talks')&&r.evidence.level!=='narrative');
  const talksBody=`<section class="record-stack" aria-label="${t.title}">${records.map(r=>recordCard(r,locale,t)).join('\n')}</section>`;
  fs.writeFileSync(path.join(dir,'talks.html'),pageShell({locale,lang:t.lang,title:t.title,eyebrow:t.eyebrow,body:talksBody}));
 }
-console.log(`Rendered identity home + talks for ${data.locales.length} locales from canonical data.`);
+console.log(`Rendered identity home, institutions, portals + talks for ${data.locales.length} locales.`);
