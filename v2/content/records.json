@@ -8,68 +8,39 @@
       "type": "dissertation-defense",
       "date": "2023-11-29",
       "institution": "KAUST",
-      "title": {
-        "en": "Broadband Wireless Communication Using Free-space Optics and Radio Frequency",
-        "zh-tw": "Broadband Wireless Communication Using Free-space Optics and Radio Frequency",
-        "zh-cn": "Broadband Wireless Communication Using Free-space Optics and Radio Frequency"
-      },
-      "meta": {
-        "en": "Ph.D. Dissertation Defense · KAUST",
-        "zh-tw": "博士論文答辯 · KAUST",
-        "zh-cn": "博士论文答辩 · KAUST"
-      },
-      "details": {
-        "en": "Electrical and Computer Engineering · Communication Theory Lab (CTL). Supervisor: Prof. Mohamed-Slim Alouini.",
-        "zh-tw": "電機與電腦工程 · Communication Theory Lab (CTL)。指導教授：Prof. Mohamed-Slim Alouini。",
-        "zh-cn": "电机与计算机工程 · Communication Theory Lab (CTL)。指导教授：Prof. Mohamed-Slim Alouini。"
-      },
-      "evidence": {
-        "level": "official",
-        "source": "KAUST CEMSE",
-        "url": "https://cemse.kaust.edu.sa/events/by-type/phd-dissertation-defense/2023/11/29/broadband-wireless-communication-using-free"
-      },
+      "title": {"en":"Broadband Wireless Communication Using Free-space Optics and Radio Frequency","zh-tw":"Broadband Wireless Communication Using Free-space Optics and Radio Frequency","zh-cn":"Broadband Wireless Communication Using Free-space Optics and Radio Frequency"},
+      "meta": {"en":"Ph.D. Dissertation Defense · KAUST","zh-tw":"博士論文答辯 · KAUST","zh-cn":"博士论文答辩 · KAUST"},
+      "details": {"en":"Defense date: November 29, 2023 · Electrical and Computer Engineering · Communication Theory Lab (CTL). Supervisor: Prof. Mohamed-Slim Alouini.","zh-tw":"答辯日期：2023 年 11 月 29 日 · 電機與電腦工程 · Communication Theory Lab (CTL)。指導教授：Prof. Mohamed-Slim Alouini。","zh-cn":"答辩日期：2023 年 11 月 29 日 · 电机与计算机工程 · Communication Theory Lab (CTL)。指导教授：Prof. Mohamed-Slim Alouini。"},
+      "evidence": {"level":"official","source":"KAUST CEMSE","url":"https://cemse.kaust.edu.sa/events/by-type/phd-dissertation-defense/2023/11/29/broadband-wireless-communication-using-free"},
       "surfaces": ["talks", "experience", "research"]
+    },
+    {
+      "id": "kaust-phd-dissertation-2023",
+      "type": "doctoral-dissertation",
+      "date": "2023-11-29",
+      "institution": "KAUST",
+      "title": {"en":"Broadband Wireless Communication Using Free-space Optics and Radio Frequency","zh-tw":"Broadband Wireless Communication Using Free-space Optics and Radio Frequency","zh-cn":"Broadband Wireless Communication Using Free-space Optics and Radio Frequency"},
+      "meta": {"en":"Ph.D. Dissertation · KAUST Research Repository","zh-tw":"博士論文 · KAUST Research Repository","zh-cn":"博士论文 · KAUST Research Repository"},
+      "details": {"en":"Doctoral dissertation. DOI: 10.25781/KAUST-4SRQ2 · Handle: 10754/696018. The repository record dates the dissertation to November 29, 2023; the repository profile entry was added in 2024.","zh-tw":"博士論文。DOI：10.25781/KAUST-4SRQ2 · Handle：10754/696018。KAUST Repository 將論文日期記為 2023 年 11 月 29 日；Repository profile 紀錄於 2024 年加入。","zh-cn":"博士论文。DOI：10.25781/KAUST-4SRQ2 · Handle：10754/696018。KAUST Repository 将论文日期记为 2023 年 11 月 29 日；Repository profile 记录于 2024 年加入。"},
+      "evidence": {"level":"official","source":"KAUST Research Repository","url":"http://hdl.handle.net/10754/696018","doi":"10.25781/KAUST-4SRQ2"},
+      "surfaces": ["experience", "research", "publications"]
     },
     {
       "id": "kaust-ms-thesis-2020",
       "type": "masters-thesis",
       "date": "2020-04",
       "institution": "KAUST",
-      "title": {
-        "en": "High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management",
-        "zh-tw": "High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management",
-        "zh-cn": "High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management"
-      },
-      "meta": {
-        "en": "M.S. Thesis · KAUST",
-        "zh-tw": "碩士論文 · KAUST",
-        "zh-cn": "硕士论文 · KAUST"
-      },
-      "details": {
-        "en": "Electrical and Computer Engineering. Advisor: Prof. Mohamed-Slim Alouini. DOI: 10.25781/KAUST-I5451 · Handle: 10754/662637.",
-        "zh-tw": "電機與電腦工程。指導教授：Prof. Mohamed-Slim Alouini。DOI：10.25781/KAUST-I5451 · Handle：10754/662637。",
-        "zh-cn": "电机与计算机工程。指导教授：Prof. Mohamed-Slim Alouini。DOI：10.25781/KAUST-I5451 · Handle：10754/662637。"
-      },
-      "evidence": {
-        "level": "official",
-        "source": "KAUST Research Repository",
-        "url": "http://hdl.handle.net/10754/662637",
-        "doi": "10.25781/KAUST-I5451"
-      },
+      "title": {"en":"High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management","zh-tw":"High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management","zh-cn":"High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management"},
+      "meta": {"en":"M.S. Thesis · KAUST","zh-tw":"碩士論文 · KAUST","zh-cn":"硕士论文 · KAUST"},
+      "details": {"en":"Electrical and Computer Engineering. Advisor: Prof. Mohamed-Slim Alouini. DOI: 10.25781/KAUST-I5451 · Handle: 10754/662637.","zh-tw":"電機與電腦工程。指導教授：Prof. Mohamed-Slim Alouini。DOI：10.25781/KAUST-I5451 · Handle：10754/662637。","zh-cn":"电机与计算机工程。指导教授：Prof. Mohamed-Slim Alouini。DOI：10.25781/KAUST-I5451 · Handle：10754/662637。"},
+      "evidence": {"level":"official","source":"KAUST Research Repository","url":"http://hdl.handle.net/10754/662637","doi":"10.25781/KAUST-I5451"},
       "surfaces": ["talks", "experience", "research", "publications"]
     },
     {
       "id": "home-trajectory",
       "type": "positioning",
-      "title": {
-        "en": "Research → Technology → Industry → Public Impact",
-        "zh-tw": "研究 → 技術 → 產業 → 公共影響",
-        "zh-cn": "研究 → 技术 → 产业 → 公共影响"
-      },
-      "evidence": {
-        "level": "narrative",
-        "source": "site positioning"
-      },
+      "title": {"en":"Research → Technology → Industry → Public Impact","zh-tw":"研究 → 技術 → 產業 → 公共影響","zh-cn":"研究 → 技术 → 产业 → 公共影响"},
+      "evidence": {"level":"narrative","source":"site positioning"},
       "surfaces": ["home"]
     }
   ]
