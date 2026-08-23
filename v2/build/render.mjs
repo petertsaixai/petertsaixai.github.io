@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { pageShell, institutionRail, identityHero, portalGrid, timeline } from '../src/components.mjs';
+import { pageShell, institutionRail, identityHero, portalGrid, milestoneTimeline } from '../src/components.mjs';
 
 const here=path.dirname(fileURLToPath(import.meta.url));
 const root=path.resolve(here,'..');
@@ -28,7 +28,7 @@ for(const locale of data.locales){
  fs.writeFileSync(path.join(dir,'index.html'),pageShell({locale,lang:copy.lang,title:copy.title,eyebrow:copy.eyebrow,body:homeBody,hero:true}));
  const t=talksLabels[locale];
  const records=data.records.filter(r=>r.surfaces.includes('talks')&&r.evidence.level!=='narrative').sort((a,b)=>(b.date??'').localeCompare(a.date??''));
- const talksBody=timeline(records,locale,t);
+ const talksBody=milestoneTimeline(records,locale,t);
  fs.writeFileSync(path.join(dir,'talks.html'),pageShell({locale,lang:t.lang,title:t.title,eyebrow:t.eyebrow,body:talksBody}));
 }
-console.log(`Rendered identity home, institutions, portals + chronological talks for ${data.locales.length} locales.`);
+console.log(`Rendered identity home, institutions, portals + grouped academic milestones for ${data.locales.length} locales.`);
