@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "institutions": [
+    {"id":"hhri","name":"HHRI","relation":{"en":"Industry & Research","zh-tw":"產業與研究","zh-cn":"产业与研究"},"target":"experience","evidenceLevel":"self_reported"},
+    {"id":"kaust","name":"KAUST","relation":{"en":"Ph.D. · M.S. · Research","zh-tw":"博士 · 碩士 · 研究","zh-cn":"博士 · 硕士 · 研究"},"target":"experience","evidenceLevel":"official"},
+    {"id":"usc","name":"USC","relation":{"en":"Visiting Scholar","zh-tw":"訪問學者","zh-cn":"访问学者"},"target":"experience","evidenceLevel":"self_reported"},
+    {"id":"nthu","name":"NTHU","relation":{"en":"Graduate Study","zh-tw":"研究所進修","zh-cn":"研究生階段學習"},"target":"experience","evidenceLevel":"self_reported"},
+    {"id":"ntut","name":"NTUT","relation":{"en":"B.S. (Honours)","zh-tw":"學士（榮譽）","zh-cn":"学士（荣誉）"},"target":"experience","evidenceLevel":"self_reported"},
+    {"id":"ntu","name":"NTU","relation":{"en":"Executive Development","zh-tw":"高階進修","zh-cn":"高阶进修"},"target":"experience","evidenceLevel":"self_reported"},
+    {"id":"nccu","name":"NCCU","relation":{"en":"Executive Development","zh-tw":"高階進修","zh-cn":"高阶进修"},"target":"experience","evidenceLevel":"self_reported"},
+    {"id":"ieee","name":"IEEE","relation":{"en":"Publications & Community","zh-tw":"論文與專業社群","zh-cn":"论文与专业社群"},"target":"publications","evidenceLevel":"publication"}
+  ],
+  "disclaimer": {
+    "en":"Names indicate documented education, research, professional experience, or community participation; they do not imply institutional endorsement.",
+    "zh-tw":"上述名稱僅表示已有紀錄的教育、研究、專業經歷或社群參與，不代表相關機構對本網站或個人的背書。",
+    "zh-cn":"上述名称仅表示已有记录的教育、研究、专业经历或社群参与，不代表相关机构对本网站或个人的背书。"
+  }
+}
