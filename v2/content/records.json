@@ -31,6 +31,34 @@
       "surfaces": ["talks", "experience", "research"]
     },
     {
+      "id": "kaust-ms-thesis-2020",
+      "type": "masters-thesis",
+      "date": "2020-04",
+      "institution": "KAUST",
+      "title": {
+        "en": "High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management",
+        "zh-tw": "High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management",
+        "zh-cn": "High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management"
+      },
+      "meta": {
+        "en": "M.S. Thesis · KAUST",
+        "zh-tw": "碩士論文 · KAUST",
+        "zh-cn": "硕士论文 · KAUST"
+      },
+      "details": {
+        "en": "Electrical and Computer Engineering. Advisor: Prof. Mohamed-Slim Alouini. DOI: 10.25781/KAUST-I5451 · Handle: 10754/662637.",
+        "zh-tw": "電機與電腦工程。指導教授：Prof. Mohamed-Slim Alouini。DOI：10.25781/KAUST-I5451 · Handle：10754/662637。",
+        "zh-cn": "电机与计算机工程。指导教授：Prof. Mohamed-Slim Alouini。DOI：10.25781/KAUST-I5451 · Handle：10754/662637。"
+      },
+      "evidence": {
+        "level": "official",
+        "source": "KAUST Research Repository",
+        "url": "http://hdl.handle.net/10754/662637",
+        "doi": "10.25781/KAUST-I5451"
+      },
+      "surfaces": ["talks", "experience", "research", "publications"]
+    },
+    {
       "id": "home-trajectory",
       "type": "positioning",
       "title": {
