@@ -13,6 +13,10 @@ export function recordCard(record, locale, labels) {
   return `<article class="record-card glass" data-record-id="${esc(record.id)}" data-evidence="${esc(record.evidence.level)}"><p class="record-meta">${esc(record.date ?? '')}${record.meta?.[locale] ? ` · ${esc(record.meta[locale])}` : ''}</p><h2>${esc(record.title[locale])}</h2>${record.details?.[locale] ? `<p class="record-detail">${esc(record.details[locale])}</p>` : ''}${evidence}</article>`;
 }
 
+export function timeline(records, locale, labels) {
+  return `<section class="timeline" data-section-id="timeline" aria-label="${esc(labels.timelineLabel ?? labels.title)}">${records.map((record,index)=>`<div class="timeline-item" data-record-id="${esc(record.id)}"><div class="timeline-axis" aria-hidden="true"><span class="timeline-node${index===0?' is-latest':''}"></span></div><div class="timeline-content">${recordCard(record,locale,labels)}</div></div>`).join('')}</section>`;
+}
+
 export function institutionRail(data, locale, label) {
   return `<section class="institution-section" data-section-id="institutions" aria-label="${esc(label)}"><p class="institution-label">${esc(label)}</p><div class="institution-rail">${data.institutions.map(item => `<a class="institution-chip" data-institution-id="${esc(item.id)}" data-evidence="${esc(item.evidenceLevel)}" href="/${locale}/${esc(item.target)}.html"><strong>${esc(item.name)}</strong><span>${esc(item.relation[locale])}</span></a>`).join('')}</div><p class="institution-note">${esc(data.disclaimer[locale])}</p></section>`;
 }
