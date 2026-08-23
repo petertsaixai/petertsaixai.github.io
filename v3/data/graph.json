@@ -1,23 +1,40 @@
 {
   "schemaVersion": 1,
-  "identity": {
-    "id": "peter-tsai-ming-cheng",
-    "displayName": "Peter Tsai Ming-Cheng",
-    "motionTokens": ["AI", "TSAI", "ENG"]
-  },
-  "nodeTypes": [
-    "person", "institution", "education", "experience", "research_topic",
-    "mentor", "thesis", "publication", "presentation", "award", "teaching",
-    "place", "evidence"
+  "identity": {"id":"peter-tsai-ming-cheng","displayName":"Peter Tsai Ming-Cheng","motionTokens":["AI","TSAI","ENG"]},
+  "nodeTypes":["person","institution","education","experience","research_topic","mentor","thesis","publication","presentation","award","teaching","place","evidence"],
+  "visibilityLevels":["hero","explore","evidence","internal"],
+  "nodes":[
+    {"id":"kaust","type":"institution","label":"King Abdullah University of Science and Technology","short":"KAUST","visibility":"hero"},
+    {"id":"usc","type":"institution","label":"University of Southern California","short":"USC","visibility":"explore"},
+    {"id":"nthu","type":"institution","label":"National Tsing Hua University","short":"NTHU","visibility":"explore"},
+    {"id":"ntut","type":"institution","label":"National Taipei University of Technology","short":"NTUT","visibility":"explore"},
+    {"id":"alouini","type":"mentor","label":"Mohamed-Slim Alouini","visibility":"explore"},
+    {"id":"molisch","type":"mentor","label":"Andreas F. Molisch","visibility":"explore"},
+    {"id":"chao","type":"mentor","label":"Chi-chao Chao","visibility":"evidence"},
+    {"id":"li","type":"mentor","label":"Jian-Rong Li","visibility":"evidence"},
+    {"id":"phd-kaust","type":"education","label":"Ph.D. in Electrical and Computer Engineering","year":2023,"institution":"kaust","mentor":"alouini","visibility":"hero"},
+    {"id":"ms-kaust","type":"education","label":"M.S. in Electrical and Computer Engineering","year":2020,"institution":"kaust","mentor":"alouini","visibility":"explore"},
+    {"id":"bs-ntut","type":"education","label":"B.S. (Hons.) in Electrical Engineering","year":2015,"institution":"ntut","mentor":"li","visibility":"explore"},
+    {"id":"nthu-study","type":"education","label":"Graduate study, Institute of Communications Engineering","startYear":2015,"endYear":2017,"institution":"nthu","mentor":"chao","status":"not completed","visibility":"internal"},
+    {"id":"usc-visiting","type":"experience","label":"Visiting Scholar, Electrical Engineering","year":2023,"institution":"usc","mentor":"molisch","visibility":"hero"},
+    {"id":"phd-thesis","type":"thesis","label":"Broadband Wireless Communication Using Free-space Optics and Radio Frequency","year":2023,"degree":"Ph.D.","doi":"10.25781/KAUST-4SRQ2","handle":"10754/696018","visibility":"explore"},
+    {"id":"ms-thesis","type":"thesis","label":"High Altitude Platform Networks (HAPNETs): Design, Deployment, and Resource Management","year":2020,"degree":"M.S.","doi":"10.25781/KAUST-I5451","handle":"10754/662637","visibility":"explore"},
+    {"id":"bs-thesis","type":"thesis","label":"A 900 MHz Low Noise Amplifier Design for the Opportunities in 5G Mobile System","year":2015,"degree":"B.S.","visibility":"evidence"},
+    {"id":"award-deans-list","type":"award","label":"CEMSE Dean’s List Award","year":2022,"detail":"Academic year 2021/22 at KAUST","visibility":"explore"},
+    {"id":"award-comsoc","type":"award","label":"IEEE ComSoc EMEA Industry-Students Panels Award","year":2020,"visibility":"explore"},
+    {"id":"award-ar","type":"award","label":"KAUSTxJunction AR Navigation Application — Second Prize","year":2018,"visibility":"explore"},
+    {"id":"teaching-calculus","type":"teaching","label":"Teaching Assistant — Calculus I and Calculus II","startYear":2012,"endYear":2015,"institution":"ntut","visibility":"evidence"},
+    {"id":"ctw-2023","type":"presentation","label":"On the Minimization of CCDF of Cramer-Rao lower bound for Hybrid RF/FSO Angle-of-Arrival Tracking","year":2023,"venue":"CTW","place":"Hualien, Taiwan","visibility":"explore"},
+    {"id":"isit-2023","type":"presentation","label":"On the Angle-of-Arrival Tracking of Narrow Gaussian Optical Beams for a One-Way Communications Link","year":2023,"venue":"ISIT","place":"Taipei, Taiwan","visibility":"explore"},
+    {"id":"wwrf-2022","type":"presentation","label":"On the Minimization of Outage Probability the Fisher Information for Hybrid RF/FSO Angle-of-Arrival Tracking","year":2022,"venue":"WWRF 47","place":"Bristol, UK","visibility":"explore"},
+    {"id":"eucnc-2021","type":"presentation","label":"A Single Detector Versus an Array of Detectors Receiver in Free-Space Optical Communications: A Performance Comparison","year":2021,"venue":"Joint EuCNC & 6G Summit","place":"Virtual","visibility":"explore"},
+    {"id":"orcid","type":"evidence","label":"ORCID","url":"https://orcid.org/0000-0003-2275-1211","visibility":"evidence"},
+    {"id":"researchgate","type":"evidence","label":"ResearchGate","url":"https://www.researchgate.net/profile/Ming-Tsai-6","visibility":"evidence"}
   ],
-  "visibilityLevels": ["hero", "explore", "evidence", "internal"],
-  "nodes": [],
-  "edges": [],
-  "rules": {
-    "chronology": "newest-first",
-    "motion": ["reveal", "hold", "connect", "resolve"],
-    "resolveTo": "peter-tsai-ming-cheng",
-    "evidenceOnDemand": true,
-    "avoidUnsupportedClaims": true
-  }
+  "edges":[
+    {"from":"peter-tsai-ming-cheng","to":"phd-kaust","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"ms-kaust","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"bs-ntut","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"nthu-study","relation":"studied"},{"from":"peter-tsai-ming-cheng","to":"usc-visiting","relation":"visited"},
+    {"from":"phd-kaust","to":"phd-thesis","relation":"produced"},{"from":"ms-kaust","to":"ms-thesis","relation":"produced"},{"from":"bs-ntut","to":"bs-thesis","relation":"produced"},
+    {"from":"phd-kaust","to":"alouini","relation":"supervised_by"},{"from":"ms-kaust","to":"alouini","relation":"supervised_by"},{"from":"usc-visiting","to":"molisch","relation":"supervised_by"},{"from":"nthu-study","to":"chao","relation":"supervised_by"},{"from":"bs-ntut","to":"li","relation":"supervised_by"}
+  ],
+  "rules":{"chronology":"newest-first","motion":["reveal","hold","connect","resolve"],"resolveTo":"peter-tsai-ming-cheng","evidenceOnDemand":true,"avoidUnsupportedClaims":true}
 }
