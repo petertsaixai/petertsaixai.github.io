@@ -13,6 +13,22 @@ export function recordCard(record, locale, labels) {
   return `<article class="record-card glass" data-record-id="${esc(record.id)}" data-evidence="${esc(record.evidence.level)}"><p class="record-meta">${esc(record.date ?? '')}${record.meta?.[locale] ? ` · ${esc(record.meta[locale])}` : ''}</p><h2>${esc(record.title[locale])}</h2>${record.details?.[locale] ? `<p class="record-detail">${esc(record.details[locale])}</p>` : ''}${evidence}</article>`;
 }
 
+function milestoneKey(record){
+  if(record.id?.startsWith('kaust-phd-')) return 'phd';
+  if(record.id?.startsWith('kaust-ms-')) return 'ms';
+  return record.id;
+}
+function milestoneTitle(key,locale,records){
+  const fixed={phd:{en:'Ph.D. Milestone','zh-tw':'博士里程碑','zh-cn':'博士里程碑'},ms:{en:'M.S. Milestone','zh-tw':'碩士里程碑','zh-cn':'硕士里程碑'}};
+  return fixed[key]?.[locale] ?? records[0]?.title?.[locale] ?? key;
+}
+export function milestoneTimeline(records, locale, labels) {
+  const groups=new Map();
+  for(const record of records){const key=milestoneKey(record);if(!groups.has(key))groups.set(key,[]);groups.get(key).push(record);}
+  const milestones=[...groups.entries()].map(([key,items])=>({key,items:items.sort((a,b)=>(b.date??'').localeCompare(a.date??'')),date:items.map(r=>r.date??'').sort().at(-1)??''})).sort((a,b)=>b.date.localeCompare(a.date));
+  return `<section class="timeline milestone-timeline" data-section-id="timeline" aria-label="${esc(labels.timelineLabel ?? labels.title)}">${milestones.map((m,index)=>`<div class="timeline-item milestone-item" data-milestone-id="${esc(m.key)}"><div class="timeline-axis" aria-hidden="true"><span class="timeline-node${index===0?' is-latest':''}"></span></div><div class="timeline-content"><details class="milestone glass"${index===0?' open':''}><summary><span class="milestone-year">${esc(m.date.slice(0,4))}</span><strong>${esc(milestoneTitle(m.key,locale,m.items))}</strong><span class="milestone-count">${m.items.length}</span></summary><div class="milestone-records">${m.items.map(record=>recordCard(record,locale,labels)).join('')}</div></details></div></div>`).join('')}</section>`;
+}
+
 export function timeline(records, locale, labels) {
   return `<section class="timeline" data-section-id="timeline" aria-label="${esc(labels.timelineLabel ?? labels.title)}">${records.map((record,index)=>`<div class="timeline-item" data-record-id="${esc(record.id)}"><div class="timeline-axis" aria-hidden="true"><span class="timeline-node${index===0?' is-latest':''}"></span></div><div class="timeline-content">${recordCard(record,locale,labels)}</div></div>`).join('')}</section>`;
 }
