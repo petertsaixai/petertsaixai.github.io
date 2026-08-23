@@ -28,5 +28,5 @@ export function siteHeader(locale) {
 
 export function pageShell({locale, lang, title, eyebrow, body, hero=false}) {
   const intro=hero?'':`<p class="eyebrow">${esc(eyebrow)}</p><h1>${esc(title)}</h1>`;
-  return `<!doctype html><html lang="${esc(lang)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>${esc(title)} · Peter Tsai Ming-Cheng</title><link rel="stylesheet" href="/v2/assets/v2.css"></head><body>${siteHeader(locale)}<main class="shell page">${intro}${body}</main><footer class="shell site-footer">© 2026 Peter Tsai Ming-Cheng</footer></body></html>`;
+  return `<!doctype html><html lang="${esc(lang)}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>${esc(title)} · Peter Tsai Ming-Cheng</title><link rel="stylesheet" href="/v2/assets/v2.css"><link rel="stylesheet" href="/v2/assets/timeline.css"></head><body>${siteHeader(locale)}<main class="shell page">${intro}${body}</main><footer class="shell site-footer">© 2026 Peter Tsai Ming-Cheng</footer></body></html>`;
 }
