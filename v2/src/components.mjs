@@ -1,4 +1,4 @@
-const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]));
 
 export function recordCard(record, locale, labels) {
   const evidence = record.evidence?.url ? `<a class="evidence-link" href="${esc(record.evidence.url)}" rel="noopener">${esc(labels.officialRecord)} <span aria-hidden="true">↗</span></a>` : '';
@@ -8,6 +8,10 @@ export function recordCard(record, locale, labels) {
     ${record.details?.[locale] ? `<p class="record-detail">${esc(record.details[locale])}</p>` : ''}
     ${evidence}
   </article>`;
+}
+
+export function institutionRail(data, locale, label) {
+  return `<section class="institution-section" data-section-id="institutions" aria-label="${esc(label)}"><p class="institution-label">${esc(label)}</p><div class="institution-rail">${data.institutions.map(item => `<a class="institution-chip" data-institution-id="${esc(item.id)}" data-evidence="${esc(item.evidenceLevel)}" href="/${locale}/${esc(item.target)}.html"><strong>${esc(item.name)}</strong><span>${esc(item.relation[locale])}</span></a>`).join('')}</div><p class="institution-note">${esc(data.disclaimer[locale])}</p></section>`;
 }
 
 export function siteHeader(locale, labels) {
