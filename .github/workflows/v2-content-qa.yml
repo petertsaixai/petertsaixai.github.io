@@ -1,0 +1,30 @@
+name: v2 system QA
+
+on:
+  push:
+    branches: [v2-system]
+    paths:
+      - 'v2/**'
+      - '.github/workflows/v2-content-qa.yml'
+  pull_request:
+    paths:
+      - 'v2/**'
+      - '.github/workflows/v2-content-qa.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate canonical multilingual content
+        run: node v2/qa/validate-content.mjs
+      - name: Build shared-component locale pages
+        run: node v2/build/render.mjs
+      - name: Validate generated locale parity
+        run: node v2/qa/validate-render.mjs
