@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "portals": [
+    {"id":"research","path":"research.html","title":{"en":"Research","zh-tw":"研究","zh-cn":"研究"},"description":{"en":"Wireless, FSO, beam tracking, LEO / NTN, and intelligent connectivity.","zh-tw":"無線、自由空間光通訊、波束追蹤、LEO / NTN 與智慧互聯。","zh-cn":"无线、自由空间光通信、波束追踪、LEO / NTN 与智能互联。"}},
+    {"id":"publications","path":"publications.html","title":{"en":"Publications","zh-tw":"論文著作","zh-cn":"论文著作"},"description":{"en":"Publication record with evidence links and bibliographic context.","zh-tw":"附證據連結與書目脈絡的論文紀錄。","zh-cn":"附证据链接与书目脉络的论文记录。"}},
+    {"id":"talks","path":"talks.html","title":{"en":"Talks","zh-tw":"演講與發表","zh-cn":"演讲与发表"},"description":{"en":"Dissertation defense, invited talks, conferences, and institutional presentations.","zh-tw":"博士答辯、受邀演講、研討會與機構發表。","zh-cn":"博士答辩、受邀演讲、研讨会与机构发表。"}},
+    {"id":"recognition","path":"recognition.html","title":{"en":"Recognition","zh-tw":"榮譽與肯定","zh-cn":"荣誉与肯定"},"description":{"en":"Academic, communications, and technology recognition.","zh-tw":"學術、通訊與科技領域的榮譽與肯定。","zh-cn":"学术、通信与科技领域的荣誉与肯定。"}},
+    {"id":"experience","path":"experience.html","title":{"en":"Experience","zh-tw":"經歷","zh-cn":"经历"},"description":{"en":"Professional work, education, international experience, and executive development.","zh-tw":"專業工作、教育、國際經歷與高階進修。","zh-cn":"专业工作、教育、国际经历与高阶进修。"}},
+    {"id":"service","path":"engagement.html","title":{"en":"Service & Engagement","zh-tw":"專業服務與參與","zh-cn":"专业服务与参与"},"description":{"en":"Professional service, affiliations, associations, mentorship, and community engagement.","zh-tw":"專業服務、組織參與、協會、指導與社群投入。","zh-cn":"专业服务、组织参与、协会、指导与社群投入。"}}
+  ]
+}
