@@ -5,7 +5,7 @@ const html = fs.readFileSync(new URL('../prototype/index.html', import.meta.url)
 
 const checks = [
   ['viewport meta', /<meta\s+name="viewport"\s+content="width=device-width,initial-scale=1">/],
-  ['horizontal overflow guard', /html\{overflow-x:hidden\}/],
+  ['horizontal overflow guard', /html\{[^}]*overflow-x:hidden[^}]*\}/],
   ['desktop two-column journey workbench', /\.journey-workbench\{display:grid;grid-template-columns:minmax\(0,1\.35fr\) minmax\(310px,\.8fr\)/],
   ['desktop sticky connected context', /\.context-panel\{position:sticky;top:28px;/],
   ['compact breakpoint', /@media\(max-width:900px\)/],
