@@ -26,6 +26,8 @@ jobs:
           node-version: 22
       - name: Validate career research graph
         run: node v3/qa/validate-graph.mjs
+      - name: Validate content and evidence integrity
+        run: node v3/qa/validate-content.mjs
       - name: Validate prototype assets
         run: |
           test -f v3/prototype/index.html
