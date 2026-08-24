@@ -1,0 +1,57 @@
+name: v3 system QA
+
+on:
+  push:
+    branches: [v3-system]
+    paths:
+      - 'v3/**'
+      - '.github/workflows/v3-qa.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'v3/**'
+      - '.github/workflows/v3-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-v3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate career research graph
+        run: node v3/qa/validate-graph.mjs
+      - name: Validate content and evidence integrity
+        run: node v3/qa/validate-content.mjs
+      - name: Validate static accessibility invariants
+        run: node v3/qa/validate-accessibility.mjs
+      - name: Validate responsive layout preflight
+        run: node v3/qa/validate-responsive.mjs
+      - name: Validate prototype assets
+        run: |
+          test -f v3/prototype/index.html
+          test -f v3/prototype/styles.css
+          test -f v3/prototype/app.js
+          test -f v3/data/site-meta.json
+          grep -q "Reveal" v3/README.md
+      - name: Enforce release-gate invariants
+        run: node v3/qa/validate-release.mjs
+      - name: Install browser QA runtime
+        run: |
+          npm install --no-save --no-package-lock playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run real-browser desktop and mobile smoke QA
+        run: node v3/qa/browser-smoke.mjs
+      - name: Upload visual QA screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v3-visual-qa-${{ github.sha }}
+          path: v3/qa/artifacts/*.png
+          if-no-files-found: warn
+          retention-days: 14
