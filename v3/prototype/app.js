@@ -3,6 +3,7 @@ const meta = await fetch('../data/site-meta.json').then(r => r.json());
 const nodes = new Map(graph.nodes.map(n => [n.id, n]));
 const edges = graph.edges;
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const compactContext = window.matchMedia('(max-width: 900px)');
 
 const identity = document.querySelector('.identity');
 const replay = document.querySelector('.replay');
@@ -73,8 +74,7 @@ function evidenceLinks(node){
   return links;
 }
 
-function showContext(node){
-  document.querySelectorAll('.journey-item').forEach(el => el.classList.toggle('is-active', el.dataset.id===node.id));
+function contextMarkup(node){
   const rel = related(node).filter(n => n.visibility !== 'internal');
   const [primaryInstitution] = rel.filter(n => n.type==='institution');
   const [primaryMentor] = rel.filter(n => n.type==='mentor');
@@ -85,7 +85,25 @@ function showContext(node){
   if(node.place) pills.push(['Place', node.place]);
   if(node.detail) pills.push(['Context', node.detail]);
   const evidence = evidenceLinks(node);
-  context.innerHTML = `<strong>${node.label}</strong><p>${yearOf(node)} · ${node.type.replace('_',' ')}</p>${pills.length?`<div class="context-grid">${pills.slice(0,3).map(([k,v])=>`<div class="context-pill"><small>${k}</small><span>${v}</span></div>`).join('')}</div>`:''}${evidence.length?`<details class="evidence"><summary>View evidence</summary><div class="evidence-links">${evidence.map(e=>`<a href="${e.href}" target="_blank" rel="noopener noreferrer">${e.label}</a>`).join('')}</div></details>`:''}`;
+  return `<strong>${node.label}</strong><p>${yearOf(node)} · ${node.type.replace('_',' ')}</p>${pills.length?`<div class="context-grid">${pills.slice(0,3).map(([k,v])=>`<div class="context-pill"><small>${k}</small><span>${v}</span></div>`).join('')}</div>`:''}${evidence.length?`<details class="evidence"><summary>View evidence</summary><div class="evidence-links">${evidence.map(e=>`<a href="${e.href}" target="_blank" rel="noopener noreferrer">${e.label}</a>`).join('')}</div></details>`:''}`;
+}
+
+function showContext(node){
+  const allItems = [...document.querySelectorAll('.journey-item')];
+  allItems.forEach(el => el.classList.toggle('is-active', el.dataset.id===node.id));
+  const markup = contextMarkup(node);
+  context.innerHTML = markup;
+
+  document.querySelectorAll('.journey-inline-context').forEach(el => el.remove());
+  if(compactContext.matches){
+    const active = allItems.find(el => el.dataset.id===node.id);
+    if(active){
+      const inline = document.createElement('div');
+      inline.className = 'journey-inline-context';
+      inline.innerHTML = `<p class="eyebrow">Connected context</p>${markup}`;
+      active.appendChild(inline);
+    }
+  }
 }
 
 for(const node of publicJourneyNodes()){
@@ -99,6 +117,15 @@ for(const node of publicJourneyNodes()){
   item.addEventListener('focus', () => showContext(node));
   journeyList.appendChild(item);
 }
+
+compactContext.addEventListener('change', () => {
+  const active = document.querySelector('.journey-item.is-active');
+  document.querySelectorAll('.journey-inline-context').forEach(el => el.remove());
+  if(active && compactContext.matches){
+    const node = nodes.get(active.dataset.id);
+    if(node) showContext(node);
+  }
+});
 
 const published = meta.lastPublishedAt ? new Date(meta.lastPublishedAt).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}) : 'Not yet published';
 const visits = Number.isFinite(meta.lifetimeVisits) ? meta.lifetimeVisits.toLocaleString() : 'Preserved externally / not imported yet';
