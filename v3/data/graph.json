@@ -12,6 +12,10 @@
     {"id":"molisch","type":"mentor","label":"Andreas F. Molisch","visibility":"explore"},
     {"id":"chao","type":"mentor","label":"Chi-chao Chao","visibility":"evidence"},
     {"id":"li","type":"mentor","label":"Jian-Rong Li","visibility":"evidence"},
+    {"id":"topic-fso","type":"research_topic","label":"Free-space optical communications","visibility":"explore"},
+    {"id":"topic-hybrid-rf-fso","type":"research_topic","label":"Hybrid RF/FSO systems","visibility":"explore"},
+    {"id":"topic-aoa","type":"research_topic","label":"Angle-of-arrival tracking","visibility":"explore"},
+    {"id":"topic-hap","type":"research_topic","label":"High-altitude platform networks","visibility":"explore"},
     {"id":"phd-kaust","type":"education","label":"Ph.D. in Electrical and Computer Engineering","year":2023,"institution":"kaust","mentor":"alouini","visibility":"hero"},
     {"id":"ms-kaust","type":"education","label":"M.S. in Electrical and Computer Engineering","year":2020,"institution":"kaust","mentor":"alouini","visibility":"explore"},
     {"id":"bs-ntut","type":"education","label":"B.S. (Hons.) in Electrical Engineering","year":2015,"institution":"ntut","mentor":"li","visibility":"explore"},
@@ -34,7 +38,9 @@
   "edges":[
     {"from":"peter-tsai-ming-cheng","to":"phd-kaust","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"ms-kaust","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"bs-ntut","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"nthu-study","relation":"studied"},{"from":"peter-tsai-ming-cheng","to":"usc-visiting","relation":"visited"},
     {"from":"phd-kaust","to":"phd-thesis","relation":"produced"},{"from":"ms-kaust","to":"ms-thesis","relation":"produced"},{"from":"bs-ntut","to":"bs-thesis","relation":"produced"},
-    {"from":"phd-kaust","to":"alouini","relation":"supervised_by"},{"from":"ms-kaust","to":"alouini","relation":"supervised_by"},{"from":"usc-visiting","to":"molisch","relation":"supervised_by"},{"from":"nthu-study","to":"chao","relation":"supervised_by"},{"from":"bs-ntut","to":"li","relation":"supervised_by"}
+    {"from":"phd-kaust","to":"alouini","relation":"supervised_by"},{"from":"ms-kaust","to":"alouini","relation":"supervised_by"},{"from":"usc-visiting","to":"molisch","relation":"supervised_by"},{"from":"nthu-study","to":"chao","relation":"supervised_by"},{"from":"bs-ntut","to":"li","relation":"supervised_by"},
+    {"from":"phd-thesis","to":"topic-fso","relation":"focuses_on"},{"from":"phd-thesis","to":"topic-hybrid-rf-fso","relation":"focuses_on"},{"from":"ms-thesis","to":"topic-hap","relation":"focuses_on"},
+    {"from":"ctw-2023","to":"topic-hybrid-rf-fso","relation":"focuses_on"},{"from":"ctw-2023","to":"topic-aoa","relation":"focuses_on"},{"from":"isit-2023","to":"topic-fso","relation":"focuses_on"},{"from":"isit-2023","to":"topic-aoa","relation":"focuses_on"},{"from":"wwrf-2022","to":"topic-hybrid-rf-fso","relation":"focuses_on"},{"from":"wwrf-2022","to":"topic-aoa","relation":"focuses_on"},{"from":"eucnc-2021","to":"topic-fso","relation":"focuses_on"}
   ],
   "rules":{"chronology":"newest-first","motion":["reveal","hold","connect","resolve"],"resolveTo":"peter-tsai-ming-cheng","evidenceOnDemand":true,"avoidUnsupportedClaims":true}
 }
