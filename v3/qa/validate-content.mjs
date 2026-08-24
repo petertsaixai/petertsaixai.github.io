@@ -9,6 +9,20 @@ const researchEvidenceTypes = new Set(['thesis','publication','presentation']);
 const identityId = graph.identity?.id;
 const hasEndpoint = id => id === identityId || nodes.has(id);
 
+function connectedNodes(id) {
+  return graph.edges
+    .filter(edge => edge.from === id || edge.to === id)
+    .map(edge => nodes.get(edge.from === id ? edge.to : edge.from))
+    .filter(Boolean);
+}
+
+function hasExternalEvidence(node) {
+  return connectedNodes(node.id).some(related =>
+    (related.type === 'evidence' && related.visibility !== 'internal' && related.url) ||
+    (related.type === 'thesis' && related.visibility !== 'internal' && (related.doi || related.handle))
+  );
+}
+
 for (const node of graph.nodes) {
   if (!node.id || !node.type || !node.label || !node.visibility) {
     fail(`node is missing required public-content fields: ${node.id || '<unknown>'}`);
@@ -18,6 +32,10 @@ for (const node of graph.nodes) {
   if (publicJourneyTypes.has(node.type) && node.visibility !== 'internal') {
     const hasDate = Number.isFinite(node.year) || Number.isFinite(node.startYear) || Number.isFinite(node.endYear);
     if (!hasDate) fail(`public journey node has no usable date: ${node.id}`);
+  }
+
+  if (publicJourneyTypes.has(node.type) && node.visibility === 'hero' && !hasExternalEvidence(node)) {
+    fail(`hero journey node must have external evidence: ${node.id}`);
   }
 
   if (node.doi && !/^10\.\d{4,9}\//.test(node.doi)) {
@@ -55,10 +73,7 @@ for (const edge of graph.edges) {
 }
 
 for (const topic of graph.nodes.filter(node => node.type === 'research_topic' && node.visibility !== 'internal')) {
-  const connected = graph.edges
-    .filter(edge => edge.from === topic.id || edge.to === topic.id)
-    .map(edge => nodes.get(edge.from === topic.id ? edge.to : edge.from))
-    .filter(Boolean);
+  const connected = connectedNodes(topic.id);
   if (!connected.length) {
     fail(`public research topic is orphaned: ${topic.id}`);
     continue;
