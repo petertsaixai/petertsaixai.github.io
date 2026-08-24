@@ -49,7 +49,7 @@ function assert(condition, message) {
 }
 
 async function checkViewport(browser, name, viewport) {
-  const page = await browser.newPage({ viewportSize: viewport, reducedMotion: 'reduce' });
+  const page = await browser.newPage({ viewport, reducedMotion: 'reduce' });
   const consoleErrors = [];
   page.on('console', msg => { if (msg.type() === 'error') consoleErrors.push(msg.text()); });
   page.on('pageerror', error => consoleErrors.push(error.message));
