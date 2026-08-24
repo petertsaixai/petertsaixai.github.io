@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "siteLaunchAt": null,
-  "lastPublishedAt": "2026-08-23T18:48:16Z",
+  "lastPublishedAt": "2026-08-24T15:37:38Z",
   "lifetimeVisits": null,
   "viewsByVersion": {},
   "releaseHistory": [
@@ -14,7 +14,9 @@
     {
       "version": "v3",
       "branch": "v3-system",
-      "status": "development"
+      "commit": "979b4b042a295f1300f1c9b934145b590e51a2c0",
+      "publishedAt": "2026-08-24T15:37:38Z",
+      "status": "production"
     }
   ],
   "rules": {
