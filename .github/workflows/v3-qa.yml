@@ -41,3 +41,17 @@ jobs:
           grep -q "Reveal" v3/README.md
       - name: Enforce release-gate invariants
         run: node v3/qa/validate-release.mjs
+      - name: Install browser QA runtime
+        run: |
+          npm install --no-save --no-package-lock playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Run real-browser desktop and mobile smoke QA
+        run: node v3/qa/browser-smoke.mjs
+      - name: Upload visual QA screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v3-visual-qa-${{ github.sha }}
+          path: v3/qa/artifacts/*.png
+          if-no-files-found: warn
+          retention-days: 14
