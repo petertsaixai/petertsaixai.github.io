@@ -8,11 +8,14 @@ const compactContext = window.matchMedia('(max-width: 900px)');
 const identity = document.querySelector('.identity');
 const replay = document.querySelector('.replay');
 const journeyList = document.querySelector('#journey-list');
+const journeyMode = document.querySelector('#journey-mode');
 const context = document.querySelector('#context-content');
 const siteMeta = document.querySelector('#site-meta');
 
 const wait = ms => new Promise(r => setTimeout(r, ms));
 let motionRunning = false;
+let showFullJourney = false;
+let activeNodeId = null;
 
 async function runIdentityMotion(){
   if(motionRunning || reducedMotion) return;
@@ -38,12 +41,17 @@ replay.addEventListener('click', runIdentityMotion);
 if(reducedMotion){ replay.hidden = true; } else { runIdentityMotion(); }
 
 function yearOf(n){ return n.year ?? n.endYear ?? n.startYear ?? 0; }
-function publicJourneyNodes(){
+function allJourneyNodes(){
   const keep = new Set(['education','experience','award','presentation','teaching']);
   return graph.nodes
     .filter(n => keep.has(n.type) && n.visibility !== 'internal')
     .sort((a,b) => yearOf(b)-yearOf(a));
 }
+function selectedJourneyNodes(){
+  const preferred = new Set(['education','experience','award']);
+  return allJourneyNodes().filter(n => n.visibility === 'hero' || preferred.has(n.type));
+}
+function publicJourneyNodes(){ return showFullJourney ? allJourneyNodes() : selectedJourneyNodes(); }
 
 function related(node){
   const ids = new Set();
@@ -89,11 +97,11 @@ function contextMarkup(node){
 }
 
 function showContext(node){
+  activeNodeId = node.id;
   const allItems = [...document.querySelectorAll('.journey-item')];
   allItems.forEach(el => el.classList.toggle('is-active', el.dataset.id===node.id));
   const markup = contextMarkup(node);
   context.innerHTML = markup;
-
   document.querySelectorAll('.journey-inline-context').forEach(el => el.remove());
   if(compactContext.matches){
     const active = allItems.find(el => el.dataset.id===node.id);
@@ -106,26 +114,43 @@ function showContext(node){
   }
 }
 
-for(const node of publicJourneyNodes()){
-  const item = document.createElement('article');
-  item.className = 'journey-item';
-  item.dataset.id = node.id;
-  item.tabIndex = 0;
-  item.innerHTML = `<span class="journey-year">${yearOf(node)}</span><span class="journey-node" aria-hidden="true"></span><div class="journey-card"><strong>${node.label}</strong><span>${node.type.replace('_',' ')}</span></div>`;
-  item.addEventListener('mouseenter', () => showContext(node));
-  item.addEventListener('click', () => showContext(node));
-  item.addEventListener('focus', () => showContext(node));
-  journeyList.appendChild(item);
+function renderJourney(){
+  journeyList.innerHTML = '';
+  let previousYear = null;
+  const visible = publicJourneyNodes();
+  for(const node of visible){
+    const year = yearOf(node);
+    const item = document.createElement('article');
+    item.className = 'journey-item';
+    item.dataset.id = node.id;
+    item.tabIndex = 0;
+    const repeat = previousYear === year;
+    item.innerHTML = `<span class="journey-year${repeat?' is-repeat':''}" aria-hidden="${repeat?'true':'false'}">${year}</span><span class="journey-node" aria-hidden="true"></span><div class="journey-card"><strong>${node.label}</strong><span>${node.type.replace('_',' ')}</span></div>`;
+    item.addEventListener('mouseenter', () => showContext(node));
+    item.addEventListener('click', () => showContext(node));
+    item.addEventListener('focus', () => showContext(node));
+    journeyList.appendChild(item);
+    previousYear = year;
+  }
+  const stillVisible = visible.find(n => n.id === activeNodeId);
+  if(stillVisible) showContext(stillVisible);
+  else if(visible[0]) showContext(visible[0]);
 }
 
-compactContext.addEventListener('change', () => {
-  const active = document.querySelector('.journey-item.is-active');
-  document.querySelectorAll('.journey-inline-context').forEach(el => el.remove());
-  if(active && compactContext.matches){
-    const node = nodes.get(active.dataset.id);
-    if(node) showContext(node);
-  }
+journeyMode.addEventListener('click', () => {
+  showFullJourney = !showFullJourney;
+  journeyMode.setAttribute('aria-expanded', String(showFullJourney));
+  journeyMode.textContent = showFullJourney ? 'Show selected journey' : 'Show full journey';
+  renderJourney();
 });
+
+compactContext.addEventListener('change', () => {
+  const node = activeNodeId ? nodes.get(activeNodeId) : null;
+  document.querySelectorAll('.journey-inline-context').forEach(el => el.remove());
+  if(node) showContext(node);
+});
+
+renderJourney();
 
 const published = meta.lastPublishedAt ? new Date(meta.lastPublishedAt).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}) : 'Not yet published';
 const visits = Number.isFinite(meta.lifetimeVisits) ? meta.lifetimeVisits.toLocaleString() : 'Preserved externally / not imported yet';
