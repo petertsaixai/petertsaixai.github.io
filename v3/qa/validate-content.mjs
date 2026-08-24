@@ -20,7 +20,7 @@ for (const node of graph.nodes) {
     if (!hasDate) fail(`public journey node has no usable date: ${node.id}`);
   }
 
-  if (node.doi && !/^10\.\d{4,9}\/.test(node.doi)) {
+  if (node.doi && !/^10\.\d{4,9}\//.test(node.doi)) {
     fail(`invalid DOI format: ${node.id}`);
   }
 
