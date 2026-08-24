@@ -5,6 +5,8 @@ const fail = msg => { console.error(`FAIL: ${msg}`); process.exitCode = 1; };
 
 const nodes = new Map(graph.nodes.map(node => [node.id, node]));
 const publicJourneyTypes = new Set(['education','experience','award','presentation','teaching']);
+const identityId = graph.identity?.id;
+const hasEndpoint = id => id === identityId || nodes.has(id);
 
 for (const node of graph.nodes) {
   if (!node.id || !node.type || !node.label || !node.visibility) {
@@ -42,8 +44,8 @@ for (const node of graph.nodes) {
 for (const edge of graph.edges) {
   const from = nodes.get(edge.from);
   const to = nodes.get(edge.to);
-  if (!from) fail(`edge references missing source node: ${edge.from}`);
-  if (!to) fail(`edge references missing target node: ${edge.to}`);
+  if (!hasEndpoint(edge.from)) fail(`edge references missing source endpoint: ${edge.from}`);
+  if (!hasEndpoint(edge.to)) fail(`edge references missing target endpoint: ${edge.to}`);
   if (!edge.relation) fail(`edge is missing relation: ${edge.from} -> ${edge.to}`);
 
   if (from && to && from.visibility !== 'internal' && to.visibility === 'internal') {
@@ -51,7 +53,6 @@ for (const edge of graph.edges) {
   }
 }
 
-const identityId = graph.identity?.id;
 if (!identityId) fail('identity id is missing');
 else {
   const identityEdges = graph.edges.filter(edge => edge.from === identityId || edge.to === identityId);
