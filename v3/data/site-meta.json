@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "siteLaunchAt": null,
+  "lastPublishedAt": "2026-08-23T18:48:16Z",
+  "lifetimeVisits": null,
+  "viewsByVersion": {},
+  "releaseHistory": [
+    {
+      "version": "v2",
+      "commit": "7bb70414bc0a1b06c31bece676ef480bb89386c3",
+      "publishedAt": "2026-08-23T18:48:16Z",
+      "status": "production"
+    },
+    {
+      "version": "v3",
+      "branch": "v3-system",
+      "status": "development"
+    }
+  ],
+  "rules": {
+    "preserveAcrossVersions": true,
+    "lastPublishedAtMeansMeaningfulRelease": true,
+    "neverResetLifetimeVisitsOnRedesign": true,
+    "nullMeansUnknownNotZero": true
+  }
+}
