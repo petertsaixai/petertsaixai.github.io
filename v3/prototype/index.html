@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
+  <a class="skip-link" href="#journey">Skip to journey</a>
   <main class="shell">
     <section class="hero" aria-labelledby="identity-name">
       <p class="eyebrow">Communications · Intelligent Connectivity · AI</p>
@@ -18,17 +19,17 @@
       <button class="replay" type="button" aria-label="Replay identity motion">Replay identity motion</button>
     </section>
 
-    <section class="journey" aria-labelledby="journey-title">
+    <section id="journey" class="journey" aria-labelledby="journey-title" tabindex="-1">
       <div class="section-head-row">
         <div class="section-head">
           <p class="eyebrow">Journey</p>
           <h2 id="journey-title">A quieter view of the research path.</h2>
           <p class="section-note">Selected milestones first. Expand only when you want the complete chronology.</p>
         </div>
-        <button id="journey-mode" class="journey-mode" type="button" aria-expanded="false">Show full journey</button>
+        <button id="journey-mode" class="journey-mode" type="button" aria-expanded="false" aria-controls="journey-list">Show full journey</button>
       </div>
       <div class="journey-workbench">
-        <div id="journey-list" class="journey-list" aria-live="polite"></div>
+        <div id="journey-list" class="journey-list" aria-live="polite" aria-label="Career and research milestones"></div>
         <aside class="context-panel" aria-live="polite" aria-label="Connected context">
           <p class="eyebrow">Connected context</p>
           <div id="context-content"><p>Hover, focus, or tap a milestone to reveal its connected institution, mentor, place, and evidence.</p></div>
