@@ -64,6 +64,29 @@ function related(node){
   return [...ids].map(id => nodes.get(id)).filter(Boolean);
 }
 
+function researchTopics(node){
+  const topics = new Map();
+  const inspect = n => {
+    if(!n || n.visibility === 'internal') return;
+    if(n.type === 'research_topic') topics.set(n.id, n);
+    for(const rel of related(n)){
+      if(rel.type === 'research_topic' && rel.visibility !== 'internal') topics.set(rel.id, rel);
+    }
+  };
+  inspect(node);
+  for(const rel of related(node)) inspect(rel);
+  return [...topics.values()];
+}
+
+function relatedJourneyNodes(node){
+  const topicIds = new Set(researchTopics(node).map(n => n.id));
+  if(!topicIds.size) return [];
+  return allJourneyNodes().filter(candidate => {
+    if(candidate.id === node.id) return false;
+    return researchTopics(candidate).some(topic => topicIds.has(topic.id));
+  });
+}
+
 function contextLabel(n){
   if(n.type==='institution') return ['Institution', n.short || n.label];
   if(n.type==='mentor') return ['Mentor', n.label];
@@ -96,25 +119,33 @@ function contextMarkup(node){
   const [primaryInstitution] = rel.filter(n => n.type==='institution');
   const [primaryMentor] = rel.filter(n => n.type==='mentor');
   const [primaryThesis] = rel.filter(n => n.type==='thesis');
-  const [primaryResearch] = rel.filter(n => n.type==='research_topic');
+  const topics = researchTopics(node);
+  const threadPeers = relatedJourneyNodes(node);
   const pills = [];
   if(primaryInstitution) pills.push(contextLabel(primaryInstitution));
   if(primaryMentor) pills.push(contextLabel(primaryMentor));
   if(primaryThesis) pills.push(contextLabel(primaryThesis));
-  if(primaryResearch) pills.push(contextLabel(primaryResearch));
+  if(topics.length) pills.push(['Research thread', topics.map(n => n.label).join(' · ')]);
   if(node.venue) pills.push(['Venue', node.venue]);
   if(node.place) pills.push(['Place', node.place]);
   if(node.detail) pills.push(['Context', node.detail]);
   const evidence = evidenceLinks(node);
-  return `<strong>${node.label}</strong><p>${yearOf(node)} · ${node.type.replace('_',' ')}</p>${pills.length?`<div class="context-grid">${pills.slice(0,4).map(([k,v])=>`<div class="context-pill"><small>${k}</small><span>${v}</span></div>`).join('')}</div>`:''}${evidence.length?`<details class="evidence"><summary>View evidence</summary><div class="evidence-links">${evidence.map(e=>`<a href="${e.href}" target="_blank" rel="noopener noreferrer">${e.label}</a>`).join('')}</div></details>`:''}`;
+  const threadNote = topics.length
+    ? `<p class="thread-note">${threadPeers.length ? `${threadPeers.length} other milestone${threadPeers.length===1?'':'s'} share this research thread.` : 'This milestone anchors a distinct research thread.'}</p>`
+    : '';
+  return `<strong>${node.label}</strong><p>${yearOf(node)} · ${node.type.replace('_',' ')}</p>${pills.length?`<div class="context-grid">${pills.slice(0,4).map(([k,v])=>`<div class="context-pill"><small>${k}</small><span>${v}</span></div>`).join('')}</div>`:''}${threadNote}${evidence.length?`<details class="evidence"><summary>View evidence</summary><div class="evidence-links">${evidence.map(e=>`<a href="${e.href}" target="_blank" rel="noopener noreferrer">${e.label}</a>`).join('')}</div></details>`:''}`;
 }
 
 function showContext(node){
   activeNodeId = node.id;
+  const topicIds = new Set(researchTopics(node).map(n => n.id));
   const allItems = [...document.querySelectorAll('.journey-item')];
   allItems.forEach(el => {
+    const itemNode = nodes.get(el.dataset.id);
     const active = el.dataset.id===node.id;
+    const connected = !active && itemNode && topicIds.size > 0 && researchTopics(itemNode).some(topic => topicIds.has(topic.id));
     el.classList.toggle('is-active', active);
+    el.classList.toggle('is-related', connected);
     el.setAttribute('aria-pressed', String(active));
   });
   const markup = contextMarkup(node);
