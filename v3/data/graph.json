@@ -33,12 +33,14 @@
     {"id":"wwrf-2022","type":"presentation","label":"On the Minimization of Outage Probability the Fisher Information for Hybrid RF/FSO Angle-of-Arrival Tracking","year":2022,"venue":"WWRF 47","place":"Bristol, UK","visibility":"explore"},
     {"id":"eucnc-2021","type":"presentation","label":"A Single Detector Versus an Array of Detectors Receiver in Free-Space Optical Communications: A Performance Comparison","year":2021,"venue":"Joint EuCNC & 6G Summit","place":"Virtual","visibility":"explore"},
     {"id":"orcid","type":"evidence","label":"ORCID","url":"https://orcid.org/0000-0003-2275-1211","visibility":"evidence"},
-    {"id":"researchgate","type":"evidence","label":"ResearchGate","url":"https://www.researchgate.net/profile/Ming-Tsai-6","visibility":"evidence"}
+    {"id":"researchgate","type":"evidence","label":"ResearchGate","url":"https://www.researchgate.net/profile/Ming-Tsai-6","visibility":"evidence"},
+    {"id":"hhri-profile","type":"evidence","label":"Hon Hai Research Institute profile","url":"https://www.hh-ri.com/en/center/next-generation-communications-research-center/members/59","visibility":"evidence"}
   ],
   "edges":[
     {"from":"peter-tsai-ming-cheng","to":"phd-kaust","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"ms-kaust","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"bs-ntut","relation":"earned"},{"from":"peter-tsai-ming-cheng","to":"nthu-study","relation":"studied"},{"from":"peter-tsai-ming-cheng","to":"usc-visiting","relation":"visited"},
     {"from":"phd-kaust","to":"phd-thesis","relation":"produced"},{"from":"ms-kaust","to":"ms-thesis","relation":"produced"},{"from":"bs-ntut","to":"bs-thesis","relation":"produced"},
     {"from":"phd-kaust","to":"alouini","relation":"supervised_by"},{"from":"ms-kaust","to":"alouini","relation":"supervised_by"},{"from":"usc-visiting","to":"molisch","relation":"supervised_by"},{"from":"nthu-study","to":"chao","relation":"supervised_by"},{"from":"bs-ntut","to":"li","relation":"supervised_by"},
+    {"from":"phd-kaust","to":"hhri-profile","relation":"verified_by"},{"from":"usc-visiting","to":"hhri-profile","relation":"verified_by"},
     {"from":"phd-thesis","to":"topic-fso","relation":"focuses_on"},{"from":"phd-thesis","to":"topic-hybrid-rf-fso","relation":"focuses_on"},{"from":"ms-thesis","to":"topic-hap","relation":"focuses_on"},
     {"from":"ctw-2023","to":"topic-hybrid-rf-fso","relation":"focuses_on"},{"from":"ctw-2023","to":"topic-aoa","relation":"focuses_on"},{"from":"isit-2023","to":"topic-fso","relation":"focuses_on"},{"from":"isit-2023","to":"topic-aoa","relation":"focuses_on"},{"from":"wwrf-2022","to":"topic-hybrid-rf-fso","relation":"focuses_on"},{"from":"wwrf-2022","to":"topic-aoa","relation":"focuses_on"},{"from":"eucnc-2021","to":"topic-fso","relation":"focuses_on"}
   ],
