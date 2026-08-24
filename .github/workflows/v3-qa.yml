@@ -28,6 +28,8 @@ jobs:
         run: node v3/qa/validate-graph.mjs
       - name: Validate content and evidence integrity
         run: node v3/qa/validate-content.mjs
+      - name: Validate static accessibility invariants
+        run: node v3/qa/validate-accessibility.mjs
       - name: Validate prototype assets
         run: |
           test -f v3/prototype/index.html
