@@ -30,6 +30,8 @@ jobs:
         run: node v3/qa/validate-content.mjs
       - name: Validate static accessibility invariants
         run: node v3/qa/validate-accessibility.mjs
+      - name: Validate responsive layout preflight
+        run: node v3/qa/validate-responsive.mjs
       - name: Validate prototype assets
         run: |
           test -f v3/prototype/index.html
