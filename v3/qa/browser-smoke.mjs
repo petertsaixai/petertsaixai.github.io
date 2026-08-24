@@ -57,11 +57,18 @@ async function checkViewport(browser, name, viewport) {
   await page.goto(`http://127.0.0.1:${port}/v3/prototype/`, { waitUntil: 'networkidle' });
   await page.waitForSelector('.journey-item');
 
+  const actualViewport = await page.evaluate(() => ({ width: innerWidth, height: innerHeight }));
+  assert(actualViewport.width === viewport.width && actualViewport.height === viewport.height,
+    `${name}: requested ${viewport.width}x${viewport.height}, got ${actualViewport.width}x${actualViewport.height}`);
+
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
   assert(overflow <= 1, `${name}: horizontal overflow detected (${overflow}px)`);
 
   const initialCount = await page.locator('.journey-item').count();
   assert(initialCount > 0, `${name}: no journey items rendered`);
+
+  const skipBox = await page.locator('.skip-link').boundingBox();
+  assert(skipBox && skipBox.y + skipBox.height <= 1, `${name}: skip link is visible before keyboard focus`);
 
   if (name === 'desktop') {
     assert(await page.locator('.context-panel').isVisible(), 'desktop: connected context panel is not visible');
@@ -76,16 +83,18 @@ async function checkViewport(browser, name, viewport) {
     assert(await page.locator('.journey-inline-context').isVisible(), 'mobile: inline connected context did not appear');
   }
 
-  const toggle = page.locator('#journey-toggle');
-  if (await toggle.count()) {
-    const before = await page.locator('.journey-item').count();
-    await toggle.click();
-    const after = await page.locator('.journey-item').count();
-    assert(after >= before, `${name}: full journey toggle reduced milestone count`);
-  }
-
   await mkdir('v3/qa/artifacts', { recursive: true });
   await page.screenshot({ path: `v3/qa/artifacts/${name}.png`, fullPage: true });
+
+  const toggle = page.locator('#journey-mode');
+  assert(await toggle.count() === 1, `${name}: progressive journey toggle is missing`);
+  const before = await page.locator('.journey-item').count();
+  await toggle.click();
+  await page.waitForFunction(count => document.querySelectorAll('.journey-item').length > count, before);
+  const after = await page.locator('.journey-item').count();
+  assert(after > before, `${name}: full journey did not reveal additional milestones`);
+  assert(await toggle.getAttribute('aria-expanded') === 'true', `${name}: journey toggle aria-expanded did not update`);
+
   assert(consoleErrors.length === 0, `${name}: browser console errors: ${consoleErrors.join(' | ')}`);
   await page.close();
 }
