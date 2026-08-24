@@ -1,17 +1,20 @@
 const graph = await fetch('../data/graph.json').then(r => r.json());
+const meta = await fetch('../data/site-meta.json').then(r => r.json());
 const nodes = new Map(graph.nodes.map(n => [n.id, n]));
 const edges = graph.edges;
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const identity = document.querySelector('.identity');
 const replay = document.querySelector('.replay');
 const journeyList = document.querySelector('#journey-list');
 const context = document.querySelector('#context-content');
+const siteMeta = document.querySelector('#site-meta');
 
 const wait = ms => new Promise(r => setTimeout(r, ms));
 let motionRunning = false;
 
 async function runIdentityMotion(){
-  if(motionRunning) return;
+  if(motionRunning || reducedMotion) return;
   motionRunning = true;
   identity.classList.remove('motion-ai','motion-tsai','motion-eng');
   await wait(700);
@@ -31,7 +34,7 @@ async function runIdentityMotion(){
 identity.addEventListener('click', runIdentityMotion);
 identity.addEventListener('keydown', e => { if(e.key==='Enter' || e.key===' '){e.preventDefault();runIdentityMotion();} });
 replay.addEventListener('click', runIdentityMotion);
-runIdentityMotion();
+if(reducedMotion){ replay.hidden = true; } else { runIdentityMotion(); }
 
 function yearOf(n){ return n.year ?? n.endYear ?? n.startYear ?? 0; }
 function publicJourneyNodes(){
@@ -60,6 +63,16 @@ function contextLabel(n){
   return [n.type.replace('_',' '), n.label];
 }
 
+function evidenceLinks(node){
+  const links = [];
+  if(node.doi) links.push({label:'DOI', href:`https://doi.org/${node.doi}`});
+  if(node.handle) links.push({label:'Repository', href:`https://repository.kaust.edu.sa/handle/${node.handle}`});
+  for(const n of related(node)){
+    if(n.type==='evidence' && n.visibility !== 'internal' && n.url) links.push({label:n.label, href:n.url});
+  }
+  return links;
+}
+
 function showContext(node){
   document.querySelectorAll('.journey-item').forEach(el => el.classList.toggle('is-active', el.dataset.id===node.id));
   const rel = related(node).filter(n => n.visibility !== 'internal');
@@ -71,7 +84,8 @@ function showContext(node){
   if(node.venue) pills.push(['Venue', node.venue]);
   if(node.place) pills.push(['Place', node.place]);
   if(node.detail) pills.push(['Context', node.detail]);
-  context.innerHTML = `<strong>${node.label}</strong><p>${yearOf(node)} · ${node.type.replace('_',' ')}</p>${pills.length?`<div class="context-grid">${pills.slice(0,3).map(([k,v])=>`<div class="context-pill"><small>${k}</small><span>${v}</span></div>`).join('')}</div>`:''}`;
+  const evidence = evidenceLinks(node);
+  context.innerHTML = `<strong>${node.label}</strong><p>${yearOf(node)} · ${node.type.replace('_',' ')}</p>${pills.length?`<div class="context-grid">${pills.slice(0,3).map(([k,v])=>`<div class="context-pill"><small>${k}</small><span>${v}</span></div>`).join('')}</div>`:''}${evidence.length?`<details class="evidence"><summary>View evidence</summary><div class="evidence-links">${evidence.map(e=>`<a href="${e.href}" target="_blank" rel="noopener noreferrer">${e.label}</a>`).join('')}</div></details>`:''}`;
 }
 
 for(const node of publicJourneyNodes()){
@@ -85,3 +99,7 @@ for(const node of publicJourneyNodes()){
   item.addEventListener('focus', () => showContext(node));
   journeyList.appendChild(item);
 }
+
+const published = meta.lastPublishedAt ? new Date(meta.lastPublishedAt).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}) : 'Not yet published';
+const visits = Number.isFinite(meta.lifetimeVisits) ? meta.lifetimeVisits.toLocaleString() : 'Preserved externally / not imported yet';
+siteMeta.innerHTML = `<span>Last meaningful release: ${published}</span><span>Lifetime visits: ${visits}</span>`;
