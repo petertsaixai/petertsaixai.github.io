@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Peter Tsai Ming-Cheng · v4 Perspective Lenses Preview</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#perspective">Skip to perspectives</a>
+  <main class="shell">
+    <section class="hero" aria-labelledby="identity-name">
+      <p class="eyebrow">Communications · Intelligent Connectivity · AI</p>
+      <h1 id="identity-name">Peter Tsai Ming-Cheng</h1>
+      <p class="positioning">Research → Technology → Industry → Public Impact</p>
+      <p class="hero-note">One career graph. Three ways to understand the path.</p>
+    </section>
+
+    <section id="perspective" class="perspective" aria-labelledby="perspective-title">
+      <div class="section-head">
+        <p class="eyebrow">Perspective lenses</p>
+        <h2 id="perspective-title">Read the same journey with a different question.</h2>
+        <p>Changing perspective changes emphasis, never the underlying facts.</p>
+      </div>
+      <div class="lens-tabs" role="tablist" aria-label="Choose a perspective">
+        <button class="lens-tab is-active" type="button" role="tab" aria-selected="true" aria-controls="lens-panel" data-lens="research">Research</button>
+        <button class="lens-tab" type="button" role="tab" aria-selected="false" aria-controls="lens-panel" data-lens="technology">Technology</button>
+        <button class="lens-tab" type="button" role="tab" aria-selected="false" aria-controls="lens-panel" data-lens="impact">Impact</button>
+      </div>
+      <div id="lens-panel" class="lens-panel" role="tabpanel" aria-live="polite"></div>
+    </section>
+
+    <section class="journey" aria-labelledby="journey-title">
+      <div class="journey-head">
+        <div>
+          <p class="eyebrow">Journey</p>
+          <h2 id="journey-title">Priority shifts with the lens.</h2>
+        </div>
+        <button id="journey-mode" type="button" aria-expanded="false" aria-controls="journey-list">Show full journey</button>
+      </div>
+      <div class="journey-workbench">
+        <div id="journey-list" class="journey-list" aria-live="polite" aria-label="Career and research milestones"></div>
+        <aside class="context-panel" aria-live="polite" aria-label="Connected context">
+          <p class="eyebrow">Connected context</p>
+          <div id="context-content"><p>Select a milestone to inspect its institution, mentor, thesis, research thread, and evidence.</p></div>
+        </aside>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <span>v4 perspective-lens preview · noindex</span>
+      <span>Production v3 remains unchanged.</span>
+    </footer>
+  </main>
+  <script src="./app.js" type="module"></script>
+</body>
+</html>
