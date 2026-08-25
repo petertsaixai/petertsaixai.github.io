@@ -25,18 +25,21 @@ No lens may invent new facts. A lens may only rank, group, and emphasize public 
 - Desktop and mobile must preserve the same information hierarchy.
 - Reduced motion is a first-class path, not a fallback.
 
-## Preview scope
+## Website preview scope
 
-The first v4 preview is intentionally narrow:
+v4 is now a multi-view website preview rather than a single interaction demo:
 
 1. Hero identity and positioning.
-2. Three Perspective Lens controls.
-3. Lens summary generated from graph-backed milestones.
-4. Journey cards re-ranked by lens relevance.
-5. Connected Context retained from v3.
-6. Evidence stays on demand.
-7. v3 production remains untouched.
+2. Throughline narrative explaining the relationship-first model.
+3. Research / Technology / Impact Perspective Lenses.
+4. Lens summary generated from graph-backed milestones.
+5. Journey cards re-ranked by lens relevance with Connected Context.
+6. Research-map section with a dedicated graph-generated `research.html` deep view.
+7. Selected-work section with a dedicated `work.html` evidence view.
+8. Current-direction section and public profile/evidence links.
+9. Desktop/mobile browser QA covers the overview and both deep views.
+10. v3 production remains untouched.
 
 ## Safety
 
-v4 development is isolated on `v4-system`. The preview lives under `/v4/prototype/` and must remain `noindex,nofollow`. Do not merge or promote to production without a separate release process and explicit owner approval.
+v4 development is isolated on `v4-system`. Every preview view lives under `/v4/prototype/` and must remain `noindex,nofollow`. Deep views reuse the same validated public v3 graph and exclude `internal` visibility. Do not merge or promote to production without a separate release process and explicit owner approval.
