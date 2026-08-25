@@ -20,19 +20,19 @@ const lenses = {
   research: {
     title: 'Research lens',
     copy: 'Foreground formal research milestones, mentors, theses, and the research threads that connect talks back to the academic path.',
-    typeWeight: {education: 5, presentation: 4, teaching: 2, award: 2, experience: 2},
+    typeWeight: {education: 6, presentation: 4, teaching: 2, award: 2, experience: 2},
     topicWeight: 3
   },
   technology: {
     title: 'Technology lens',
     copy: 'Foreground milestones that carry explicit technical research threads, so the journey reads through the problems and systems being worked on rather than degree labels alone.',
-    typeWeight: {presentation: 5, education: 3, experience: 3, award: 1, teaching: 1},
+    typeWeight: {presentation: 7, education: 2, experience: 3, award: 1, teaching: 1},
     topicWeight: 5
   },
   impact: {
     title: 'Impact lens',
     copy: 'Foreground experience, recognition, and the institutions around the work while retaining evidence links back to the underlying research path.',
-    typeWeight: {experience: 5, award: 4, education: 3, presentation: 2, teaching: 2},
+    typeWeight: {experience: 7, award: 6, education: 2, presentation: 2, teaching: 2},
     topicWeight: 1
   }
 };
