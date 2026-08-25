@@ -4,18 +4,42 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Peter Tsai Ming-Cheng · v4 Perspective Lenses Preview</title>
+  <title>Peter Tsai Ming-Cheng · v4 Website Preview</title>
   <link rel="stylesheet" href="./styles.css">
   <link rel="stylesheet" href="./polish.css">
+  <link rel="stylesheet" href="./site.css">
 </head>
 <body>
   <a class="skip-link" href="#perspective">Skip to perspectives</a>
   <main class="shell">
+    <nav class="site-nav" aria-label="Preview navigation">
+      <a class="brand" href="./index.html">Peter Tsai Ming-Cheng</a>
+      <div class="nav-links">
+        <a href="#perspective">Perspectives</a>
+        <a href="#journey">Journey</a>
+        <a href="./research.html">Research</a>
+        <a href="./work.html">Selected work</a>
+      </div>
+    </nav>
+
     <section class="hero" aria-labelledby="identity-name">
       <p class="eyebrow">Communications · Intelligent Connectivity · AI</p>
       <h1 id="identity-name">Peter Tsai Ming-Cheng</h1>
       <p class="positioning">Research → Technology → Industry → Public Impact</p>
       <p class="hero-note">One career graph. Three ways to understand the path.</p>
+    </section>
+
+    <section class="story" aria-labelledby="story-title">
+      <div class="story-grid">
+        <div>
+          <p class="eyebrow">Throughline</p>
+          <h2 id="story-title" class="story-lead">A research path that becomes more useful when the relationships are visible.</h2>
+        </div>
+        <div class="story-copy">
+          <p>v4 keeps the same evidence-backed career graph from v3, but stops treating chronology as the only useful reading order. Education, research topics, mentors, institutions, talks, and evidence can now be read according to the question a visitor brings.</p>
+          <p>The facts do not change with the lens. Only emphasis does.</p>
+        </div>
+      </div>
     </section>
 
     <section id="perspective" class="perspective" aria-labelledby="perspective-title">
@@ -32,7 +56,7 @@
       <div id="lens-panel" class="lens-panel" role="tabpanel" aria-live="polite"></div>
     </section>
 
-    <section class="journey" aria-labelledby="journey-title">
+    <section id="journey" class="journey" aria-labelledby="journey-title">
       <div class="journey-head">
         <div>
           <p class="eyebrow">Journey</p>
@@ -49,8 +73,50 @@
       </div>
     </section>
 
+    <section class="threads" aria-labelledby="threads-preview-title">
+      <div class="section-row">
+        <div><p class="eyebrow">Research map</p><h2 id="threads-preview-title">Four threads behind the timeline.</h2></div>
+        <a class="text-link" href="./research.html">Explore all research threads →</a>
+      </div>
+      <div class="card-grid">
+        <article class="thread-card"><p class="card-kicker">Optical links</p><h3>Free-space optical communications</h3><p>Connects dissertation work and conference presentations through a shared optical-communication research thread.</p></article>
+        <article class="thread-card"><p class="card-kicker">Hybrid systems</p><h3>Hybrid RF/FSO systems</h3><p>Connects radio-frequency and optical-system work without flattening them into a single résumé bullet.</p></article>
+        <article class="thread-card"><p class="card-kicker">Tracking & networks</p><h3>Angle-of-arrival · HAP networks</h3><p>Surfaces the narrower technical problems that sit underneath the broader communications narrative.</p></article>
+      </div>
+    </section>
+
+    <section class="selected-work" aria-labelledby="work-preview-title">
+      <div class="section-row">
+        <div><p class="eyebrow">Selected work</p><h2 id="work-preview-title">Evidence stays close to the claim.</h2></div>
+        <a class="text-link" href="./work.html">Open selected work & evidence →</a>
+      </div>
+      <div class="card-grid">
+        <article class="work-card"><p class="card-kicker">2023 · Ph.D. thesis</p><h3>Broadband Wireless Communication Using Free-space Optics and Radio Frequency</h3><p>Connected to DOI and KAUST repository evidence in the public graph.</p></article>
+        <article class="work-card"><p class="card-kicker">2020 · M.S. thesis</p><h3>High Altitude Platform Networks</h3><p>Grounds the high-altitude platform research thread with thesis-level evidence.</p></article>
+        <article class="work-card"><p class="card-kicker">2021–2023 · presentations</p><h3>FSO, hybrid RF/FSO, and angle-of-arrival tracking</h3><p>Conference milestones become research signals instead of a disconnected list of talks.</p></article>
+      </div>
+    </section>
+
+    <section class="direction" aria-labelledby="direction-title">
+      <div class="direction-grid">
+        <div>
+          <p class="eyebrow">Current direction</p>
+          <h2 id="direction-title" class="story-lead">Keep the technical depth, make the path legible beyond academia.</h2>
+          <p class="direction-copy">The public positioning stays intentionally broad: communications, intelligent connectivity, AI, technology, industry, and public impact. v4 does not invent a new biography; it creates clearer paths through evidence that already exists.</p>
+        </div>
+        <div class="direction-card">
+          <p class="card-kicker">Profiles & evidence</p>
+          <div class="profile-links">
+            <a href="https://orcid.org/0000-0003-2275-1211" target="_blank" rel="noopener noreferrer">ORCID</a>
+            <a href="https://www.researchgate.net/profile/Ming-Tsai-6" target="_blank" rel="noopener noreferrer">ResearchGate</a>
+            <a href="https://www.hh-ri.com/en/center/next-generation-communications-research-center/members/59" target="_blank" rel="noopener noreferrer">HHRI profile</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <footer class="site-footer">
-      <span>v4 perspective-lens preview · noindex</span>
+      <span>v4 full-site preview · noindex</span>
       <span>Production v3 remains unchanged.</span>
     </footer>
   </main>
